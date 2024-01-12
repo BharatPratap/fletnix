@@ -2,3 +2,6 @@ node_modules
 package-lock.json
 .env
 netflix_titles.csv
+.angular
+.DS_Store
+.editorconfig
