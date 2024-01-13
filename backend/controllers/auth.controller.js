@@ -16,44 +16,40 @@ exports.signup = (req, res) => {
     res.status(200).send({ message: 'New User created' });
 };
 
-exports.signin = (req, res) => {
-    User.findOne({
-        username: req.body.email,
-    })
-        .exec((err, user) => {
-            if (err) {
-                res.status(500).send({ message: err });
-                return;
-            }
+exports.signin = async (req, res) => {
+    const userData = await User.findOne({
+        email: req.body.email,
+    });
+    console.log(userData);
 
-            if (!user) {
-                return res.status(404).send({ message: "User Not found." });
-            }
+    if (!userData) {
+        return res.status(404).send({ message: "User Not found." });
+    }
 
-            var passwordIsValid = bcrypt.compareSync(
-                req.body.password,
-                user.password
-            );
+    var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        userData.password
+    );
 
-            if (!passwordIsValid) {
-                return res.status(401).send({ message: "Invalid Password!" });
-            }
+    if (!passwordIsValid) {
+        return res.status(401).send({ message: "Invalid Password!" });
+    }
 
-            const token = jwt.sign({ id: user.id },
-                config.secret,
-                {
-                    algorithm: 'HS256',
-                    allowInsecureKeySizes: true,
-                    expiresIn: 86400, // 24 hours
-                });
-
-            req.session.token = token;
-
-            res.status(200).send({
-                id: user._id,
-                email: user.email
-            });
+    const token = jwt.sign({ id: userData.id },
+        config.secret,
+        {
+            algorithm: 'HS256',
+            allowInsecureKeySizes: true,
+            expiresIn: 86400, // 24 hours
         });
+
+    req.session.token = token;
+
+    res.status(200).send({
+        id: userData._id,
+        email: userData.email
+    });
+
 };
 
 exports.signout = async (req, res) => {
