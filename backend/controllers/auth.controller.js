@@ -12,12 +12,8 @@ exports.signup = (req, res) => {
         password: bcrypt.hashSync(req.body.password),
     });
 
-    user.save((err, user) => {
-        if (err) {
-            res.status(500).send({ message: err });
-            return;
-        }
-    });
+    user.save();
+    res.status(200).send({ message: 'New User created' });
 };
 
 exports.signin = (req, res) => {
