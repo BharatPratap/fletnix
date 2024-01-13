@@ -7,13 +7,13 @@ const titleSchema = mongoose.Schema({
     director: { type: String },
     cast: { type: Array },
     country: { type: Array },
-    dateAdded: { type: String, required: true},
-    releaseYear: { type: String, required: true},
-    rating: { type: String, required: true},
-    duration: { type: String, required: true},
-    listedIn: { type: Array, required: true},
-    description: { type: String, required: true },
-    imageUrl: { type: String, required: true }
+    dateAdded: { type: String},
+    releaseYear: { type: String},
+    rating: { type: String},
+    duration: { type: String},
+    listedIn: { type: Array},
+    description: { type: String },
+    imageUrl: { type: String }
 });
 
 module.exports = mongoose.model('Title', titleSchema);

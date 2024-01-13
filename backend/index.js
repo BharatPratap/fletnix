@@ -4,7 +4,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 require('dotenv').config()
 
-const { connect, getClient } = require('./db');
+// const { connect, getClient } = require('./db');
 const db = require("./models");
 
 const app = express();
@@ -47,25 +47,25 @@ require('./routes/user.routes')(app);
 
 
 
-connect();
-let client;
+// connect();
+// let client;
 
-app.post('/handleQuery', async (req, res) => {
-    const { customerId, query } = req.body;
+// app.post('/handleQuery', async (req, res) => {
+//     const { customerId, query } = req.body;
 
-    try {
-        client = getClient();
-        await client.connect();
-        const database = client.db('fletnix');
-        const titlesCollection = database.collection('title_list');
-        const obj = await titlesCollection.find({ query }).toArray();
+//     try {
+//         client = getClient();
+//         await client.connect();
+//         const database = client.db('fletnix');
+//         const titlesCollection = database.collection('title_list');
+//         const obj = await titlesCollection.find({ query }).toArray();
 
-        res.json({ response: obj[0] });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+//         res.json({ response: obj[0] });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

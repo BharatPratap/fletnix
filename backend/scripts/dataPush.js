@@ -1,7 +1,10 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const csvFilePath = 'netflix_titles.csv';
 const csv = require('csvtojson');
+require('dotenv').config()
 const uri = process.env.MONGO_URI;
+const db = require("../models");
+const Title = db.title;
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -25,34 +28,29 @@ const dataPush = async () => {
     const jsonArray = await csv()
         .fromFile(csvFilePath)
         .then(async (jsonObj) => {
-            let titlesArray = [];
-            jsonObj.forEach(async (obj) => {
-                let title = {};
-                title.showId = obj.show_id;
-                title.type = obj.type;
-                title.title = obj.title;
-                title.director = obj.director;
-                title.cast = obj.cast.split(', ');
-                title.country = obj.country;
-                title.dateAdded = obj.date_added;
-                title.releaseYear = obj.release_year;
-                title.rating = obj.rating;
-                title.duration = obj.duration;
-                title.listedIn = obj.listed_in;
-                title.description = obj.description;
-                titlesArray.push(title);
-            })
-            try {
-                await client.connect();
-                const database = client.db('fletnix');
-                const titleCollection = database.collection('title_list');
-                const result = await titleCollection.count({});
-                console.log(`User added with ID: ${result}`);
-            } finally {
-                await client.close();
-            }
+
+            jsonObj = jsonObj.map(async (obj) => {
+                return {
+                    showId: obj.show_id,
+                    type: obj.type,
+                    title: obj.title,
+                    director: obj.director,
+                    cast: obj.cast.split(', '),
+                    country: obj.country,
+                    dateAdded: obj.date_added,
+                    releaseYear: obj.release_year,
+                    rating: obj.rating,
+                    duration: obj.duration,
+                    listedIn: obj.listed_in,
+                    description: obj.description,
+                    imageUrl: ""
+                }
+            });
+            const database = client.db('test');
+            const titlesCollection = database.collection('titles');
+            const obj = await titlesCollection.insertMany(jsonObj);
         })
-        
+
 }
 
 dataPush();
