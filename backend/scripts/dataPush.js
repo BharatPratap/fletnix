@@ -29,7 +29,7 @@ const dataPush = async () => {
         .fromFile(csvFilePath)
         .then(async (jsonObj) => {
 
-            jsonObj = jsonObj.map(async (obj) => {
+            jsonObj = jsonObj.map((obj) => {
                 return {
                     showId: obj.show_id,
                     type: obj.type,
@@ -48,7 +48,10 @@ const dataPush = async () => {
             });
             const database = client.db('test');
             const titlesCollection = database.collection('titles');
+            console.log(jsonObj);
+            // return;
             const obj = await titlesCollection.insertMany(jsonObj);
+            return;
         })
 
 }
