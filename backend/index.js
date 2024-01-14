@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 app.use(
     cors({
         credentials: true,
-        origin: ["http://localhost:8081"],
+        origin: ["http://localhost:4200"],
     })
 );
 
@@ -47,28 +47,6 @@ app.get("/", (req, res) => {
 });
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
-
-
-
-// connect();
-// let client;
-
-// app.post('/handleQuery', async (req, res) => {
-//     const { customerId, query } = req.body;
-
-//     try {
-//         client = getClient();
-//         await client.connect();
-//         const database = client.db('fletnix');
-//         const titlesCollection = database.collection('title_list');
-//         const obj = await titlesCollection.find({ query }).toArray();
-
-//         res.json({ response: obj[0] });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

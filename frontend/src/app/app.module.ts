@@ -12,6 +12,7 @@ import { UserViewComponent } from './user/user.component';
 import { FormsModule }   from '@angular/forms';
 
 import { httpInterceptorProviders } from './_helper/http.interceptor';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { httpInterceptorProviders } from './_helper/http.interceptor';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    UserViewComponent
+    UserViewComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

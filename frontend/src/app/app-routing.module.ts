@@ -6,13 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserViewComponent } from './user/user.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: UserViewComponent },
+  { path: 'user', component: SearchComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

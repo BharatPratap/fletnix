@@ -1,0 +1,18 @@
+<!-- search.component.html -->
+<div>Search here</div>
+<div>
+    <input [(ngModel)]="query" placeholder="Search term" />
+    <button (click)="search()">Search</button>
+</div>
+
+<div *ngIf="results?.items">
+    <div *ngFor="let item of results?.items">
+        <p>{{item?.id}}-{{item?.name}}</p>
+    </div>
+
+    <div>
+        <button [disabled]="results?.page === 1" (click)="prevPage()">Previous</button>
+        Page {{ results?.page }} of {{ results?.totalPages }}
+        <button [disabled]="results?.page === results?.totalPages" (click)="nextPage()">Next</button>
+    </div>
+</div>
