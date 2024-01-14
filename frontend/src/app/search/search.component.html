@@ -1,6 +1,29 @@
 <!-- search.component.html -->
 <div>Search here</div>
 <div>
+    <label for="type">Type</label>
+    <select name="type" id="type">
+        <option value="Movie">Movie</option>
+        <option value="TV Show">TV Show</option>
+    </select>
+</div>
+<div>
+    <input [(ngModel)]="query" placeholder="Search term" />
+    <button (click)="search()">Search</button>
+</div>
+<div>
+    <input [(ngModel)]="query" placeholder="Search term" />
+    <button (click)="search()">Search</button>
+</div>
+<div>
+    <input [(ngModel)]="query" placeholder="Search term" />
+    <button (click)="search()">Search</button>
+</div>
+<div>
+    <input [(ngModel)]="query" placeholder="Search term" />
+    <button (click)="search()">Search</button>
+</div>
+<div>
     <input [(ngModel)]="query" placeholder="Search term" />
     <button (click)="search()">Search</button>
 </div>

@@ -36,12 +36,12 @@ const dataPush = async () => {
                     title: obj.title,
                     director: obj.director,
                     cast: obj.cast.split(', '),
-                    country: obj.country,
+                    country: obj.country.split(', '),
                     dateAdded: obj.date_added,
                     releaseYear: obj.release_year,
-                    rating: obj.rating,
+                    rating: obj.rating.split(', '),
                     duration: obj.duration,
-                    listedIn: obj.listed_in,
+                    listedIn: obj.listed_in.split(', '),
                     description: obj.description,
                     imageUrl: ""
                 }
@@ -51,8 +51,9 @@ const dataPush = async () => {
             console.log(jsonObj);
             // return;
             const obj = await titlesCollection.insertMany(jsonObj);
-            return;
+            return obj;
         })
+        return;
 
 }
 

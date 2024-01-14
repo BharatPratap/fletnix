@@ -24,10 +24,32 @@ export class SearchComponent implements OnInit {
   page: number = 1;
   pageSize: number = 10;
   results?: Result;
+  type?: Array<string> = [];
+  title?: string = "";
+  director?: "";
+  country?: Array<string> = [];
 
   constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
+    this.getData()
+  }
+
+  getData() : void {
+    this.searchService.fetchDefault().subscribe({
+      next: data => {
+        this.type = data.type;
+        this.director = data.director;
+        this.country = data.country;
+      },
+      error: err => {console.log(err)
+        if (err.error) {
+          this.results = JSON.parse(err.error).message;
+        } else {
+          this.results = JSON.parse("Error with status: " + err.status);
+        }
+      }
+    });
   }
 
   search(): void {

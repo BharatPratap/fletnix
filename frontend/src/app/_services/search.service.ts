@@ -30,4 +30,13 @@ export class SearchService {
       );
     
   }
+  
+  fetchDefault(): Observable<any> {
+    return this.http.post(
+      this.apiUrl,
+      {},
+      httpOptions
+    );
+  
+}
 }

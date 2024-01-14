@@ -1,3 +1,6 @@
+const db = require("../models");
+const Title = db.title;
+
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
 };
@@ -46,5 +49,20 @@ exports.search = (req, res) => {
         items: slicedItems,
         page: page,
         totalPages: totalPages,
+    });
+}
+
+exports.fetchDefaults = async (req, res) => {
+
+    const type = await Title.distinct("type");
+    const country = await Title.distinct("country");
+    const rating = await Title.distinct("rating");
+    const listedIn = await Title.distinct("listedIn");
+    
+    res.json({
+        type,
+        country,
+        rating,
+        listedIn
     });
 }

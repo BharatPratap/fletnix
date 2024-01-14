@@ -14,4 +14,5 @@ module.exports = function (app) {
 
     app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
     app.post("/api/search", controller.search)
+    app.post("/api/fetchDefaults", controller.fetchDefaults)
 };
