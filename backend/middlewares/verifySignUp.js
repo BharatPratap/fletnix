@@ -8,7 +8,7 @@ const checkDuplicateEmail = async (req, res, next) => {
             email: req.body.email
         });
         console.log(userData);
-        if (userData) {
+        if (userData.length > 0) {
             res.status(400).send({ message: "Failed! Email is already in use!" });
             return;
         }

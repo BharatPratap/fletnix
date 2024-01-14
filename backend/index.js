@@ -10,10 +10,13 @@ const db = require("./models");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const corsOptions = {
-    origin: "http://localhost:3001"
-};
-app.use(cors(corsOptions));
+app.use(
+    cors({
+        credentials: true,
+        origin: ["http://localhost:8081"],
+    })
+);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
