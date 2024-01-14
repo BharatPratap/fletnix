@@ -14,13 +14,13 @@ const httpOptions = {
 
 
 export class SearchService {
-  private apiUrl = 'http://localhost:3000/api/search/';
+  private apiUrl = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) {}
 
   search(query: string, page: number, pageSize: number): Observable<any> {
       return this.http.post(
-        this.apiUrl,
+        this.apiUrl+'search/',
         {
           query,
           page,
@@ -33,7 +33,7 @@ export class SearchService {
   
   fetchDefault(): Observable<any> {
     return this.http.post(
-      this.apiUrl,
+      this.apiUrl+'fetchDefaults/',
       {},
       httpOptions
     );

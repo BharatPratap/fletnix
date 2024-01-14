@@ -3,14 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../_services/search.service';
 
 interface Title {
-  id: string;
-  name: string;
+  type: string;
+  title: string;
+  releaseYear: string;
+  duration: string;
+  description: string;
 }
 
 interface Result {
-    items: Array<Title>;
-    page: number,
-    totalPages: number
+  items: Array<Title>;
+  page: number,
+  totalPages: number
 }
 
 @Component({
@@ -28,21 +31,25 @@ export class SearchComponent implements OnInit {
   title?: string = "";
   director?: "";
   country?: Array<string> = [];
+  rating?: Array<string> = [];
+  listedIn?: Array<string> = [];
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
     this.getData()
   }
 
-  getData() : void {
+  getData(): void {
     this.searchService.fetchDefault().subscribe({
       next: data => {
         this.type = data.type;
-        this.director = data.director;
         this.country = data.country;
+        this.rating = data.rating;
+        this.listedIn = data.listedIn;
       },
-      error: err => {console.log(err)
+      error: err => {
+        console.log(err)
         if (err.error) {
           this.results = JSON.parse(err.error).message;
         } else {
@@ -57,7 +64,8 @@ export class SearchComponent implements OnInit {
       next: data => {
         this.results = data;
       },
-      error: err => {console.log(err)
+      error: err => {
+        console.log(err)
         if (err.error) {
           this.results = JSON.parse(err.error).message;
         } else {

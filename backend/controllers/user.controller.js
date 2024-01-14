@@ -9,41 +9,17 @@ exports.userBoard = (req, res) => {
     res.status(200).send("User Content.");
 };
 
-const items = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 1, name: 'Item 1' }
-    ];
-
-exports.search = (req, res) => {
+exports.search = async (req, res) => {
     const query = req.body.query;
     const page = parseInt(req.body.page) || 1;
     const pageSize = parseInt(req.body.pageSize) || 10;
 
     // Filter items based on the query
-    const filteredItems = items.filter((item) => item.name.toLowerCase().includes(query));
-
-    // Calculate pagination details
-    const totalPages = Math.ceil(filteredItems.length / pageSize);
+    let items = await Title.find({ "title" : {"$regex": query,'$options' : 'i' }});
+    const totalPages = Math.ceil(items.length / pageSize);
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const slicedItems = filteredItems.slice(startIndex, endIndex);
+    const slicedItems = items.slice(startIndex, endIndex);
 
     res.json({
         items: slicedItems,
