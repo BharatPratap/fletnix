@@ -43,7 +43,7 @@ db.mongoose
     });
 
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+    res.json({ message: "Welcome to fletnix application." });
 });
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
