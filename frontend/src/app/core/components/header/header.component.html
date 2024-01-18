@@ -1,7 +1,15 @@
-<header class="bg-main sticky top-0">
-    <div>
-        <img src="/assets/netflix.png" alt="">
-        <div></div>
+<header class="bg-main dark-nav sticky top-0 py-3 bg-gray-900 flex item-center justify-between px-10">
+    <div class="flex gap-5">
+        <img width="110" src="/assets/netflix.png" alt="">
+        <ul class="flex py-2 item-center" *ngFor="let item of navList">
+            <li class="text-neutral-200 cursor-pointer text-sm font-extralight hover:text-gray-400 transition-[1s]">{{item}}</li>
+        </ul>
+    </div>
+
+    <div class="text-white flex gap-2">
+        <a href="/" class="py-2"><span>Welcome <strong>Bharat</strong></span></a>
+        <img class="rounded-sm" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="" width="42">
+        <a class="text-neutral-200 py-2 cursor-pointer text-sm font-extralight hover:text-gray-400 transition-[1s]" href="/" (click)="logout()">Sign out</a>
     </div>
 
 </header>
