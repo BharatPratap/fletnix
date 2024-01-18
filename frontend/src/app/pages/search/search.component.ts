@@ -1,6 +1,6 @@
 // search.component.ts
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../_services/search.service';
+import { SearchService } from '../../_services/search.service';
 
 interface Title {
   type: string;
