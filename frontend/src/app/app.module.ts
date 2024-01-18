@@ -27,7 +27,6 @@ import { BrowseComponent } from './pages/browse/browse.component';
     ProfileComponent,
     UserViewComponent,
     SearchComponent,
-    BannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +35,7 @@ import { BrowseComponent } from './pages/browse/browse.component';
     HttpClientModule,
     HeaderComponent,
     BrowseComponent,
+    BannerComponent,
     CommonModule
   ],
   providers: [httpInterceptorProviders],
