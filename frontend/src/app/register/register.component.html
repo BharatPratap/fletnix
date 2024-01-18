@@ -1,59 +1,84 @@
-<div class="col-md-12">
-    <div class="card card-container">
-        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+<div>
+    <div class="absolute">
+        <img
+            src="https://assets.nflxext.com/ffe/siteui/vlv3/8dc3f88b-a96a-4d8a-af9a-a69e6f3b2506/f5dda23e-4470-4f6a-8037-f8905acbb350/US-en-20210524-popsignuptwoweeks-perspective_alpha_website_small.jpg">
+    </div>
+    <div
+        class="w-full md:w-3/12 absolute right-0 left-0 p-12 bg-black my-36 mx-auto text-white rounded-lg bg-opacity-80">
+        <div class="flex  w-full justify-center items-center py-9">
+            <img src="../../assets/netflix.png" alt="" srcset="" height="50rem" width="150rem" class="items-center">
+        </div>
         @if (!isSuccessful) {
-        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="" novalidate>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
-                    #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
-                @if (email.errors && f.submitted) {
-                <div class="invalid-feedback">
-                    @if (email.errors['required']) {
-                    <div>Email is required</div>
-                    }
-                    @if (email.errors['email']) {
-                    <div>Email must be a valid email address</div>
+                <div class="form-group">
+                    <label for="email" class="block text-sm font-medium leading-6">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required [(ngModel)]="form.email"
+                        #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                        class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    @if (email.errors && f.submitted) {
+                    <div class="invalid-feedback">
+                        @if (email.errors['required']) {
+                        <div>Email is required</div>
+                        }
+                        @if (email.errors['email']) {
+                        <div>Email must be a valid email address</div>
+                        }
+                    </div>
                     }
                 </div>
-                }
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-                    minlength="6" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
-                @if (password.errors && f.submitted) {
-                <div class="invalid-feedback">
-                    @if (password.errors['required']) {
-                    <div>Password is required</div>
-                    }
-                    @if (password.errors['minlength']) {
-                    <div>Password must be at least 6 characters</div>
-                    }
+                <div class="flex items-center justify-between">
+                    <label for="password" class="block text-sm font-medium leading-6 ">Password</label>
                 </div>
-                }
+                <div class="mt-2">
+                    <input id="password" name="password" type="password" autocomplete="current-password" required
+                        [(ngModel)]="form.password" required minlength="6" #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                        class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        @if (password.errors && f.submitted) {
+                            <div class="invalid-feedback">
+                                @if (password.errors['required']) {
+                                <div>Password is required</div>
+                                }
+                                @if (password.errors['minlength']) {
+                                <div>Password must be at least 6 characters</div>
+                                }
+                            </div>
+                            }
+                </div>
+
             </div>
             <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" class="form-control" name="age" [(ngModel)]="form.age" required #age="ngModel" [ngClass]="{ 'is-invalid': f.submitted && age.errors }" />
-                @if (age.errors && f.submitted) {
-                <div class="invalid-feedback">
-                    @if (age.errors['required']) {
-                    <div>Age is required</div>
-                    }
+                <div class="form-group">
+                    <label for="age" class="block text-sm font-medium leading-6">Age</label>
+                    <input id="age" name="age" type="number" required [(ngModel)]="form.age"
+                        #age="ngModel" [ngClass]="{ 'is-invalid': f.submitted && age.errors }"
+                        class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        @if (age.errors && f.submitted) {
+                            <div class="invalid-feedback">
+                                @if (age.errors['required']) {
+                                <div>Age is required</div>
+                                }
+                            </div>
+                            }
                 </div>
-                }
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block">Sign Up</button>
             </div>
-
-            @if (f.submitted && isSignUpFailed) {
-            <div class="alert alert-warning">
-                Signup failed!<br />{{ errorMessage }}
+            <div class="form-group">
+                @if (f.submitted && isSignUpFailed) {
+                    <div class="alert alert-warning">
+                        Signup failed!<br />{{ errorMessage }}
+                    </div>
+                    }
             </div>
-            }
         </form>
+        <div class="text-sm">
+            <a href="/login" class="font-semibol hover:text-blue-300">Already a user? Log in here.</a>
+        </div>
         } @else {
         <div class="alert alert-success">Your registration is successful!</div>
         }
