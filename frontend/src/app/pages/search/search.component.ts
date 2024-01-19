@@ -1,6 +1,11 @@
 // search.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { SearchService } from '../../_services/search.service';
+import { HeaderComponent } from '../../core/components/header/header.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MovieService } from '../../_services/movie.service';
+import { CardViewComponent } from '../../core/components/card-view/card-view.component';
 
 interface Title {
   type: string;
@@ -20,70 +25,31 @@ interface Result {
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
+  standalone: true,
+  imports: [HeaderComponent, FormsModule, CommonModule, CardViewComponent]
 })
 
 export class SearchComponent implements OnInit {
   query: string = '';
-  page: number = 1;
-  pageSize: number = 10;
-  results?: Result;
-  type?: Array<string> = [];
-  title?: string = "";
-  director?: "";
-  country?: Array<string> = [];
-  rating?: Array<string> = [];
-  listedIn?: Array<string> = [];
+  movieData: any = {};
+  page = 1;
 
-  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.getData()
-  }
-
-  getData(): void {
-    this.searchService.fetchDefault().subscribe({
-      next: data => {
-        this.type = data.type;
-        this.country = data.country;
-        this.rating = data.rating;
-        this.listedIn = data.listedIn;
-      },
-      error: err => {
-        console.log(err)
-        if (err.error) {
-          this.results = JSON.parse(err.error).message;
-        } else {
-          this.results = JSON.parse("Error with status: " + err.status);
-        }
-      }
-    });
   }
 
   search(): void {
-    this.searchService.search(this.query, this.page, this.pageSize).subscribe({
-      next: data => {
-        this.results = data;
-      },
-      error: err => {
-        console.log(err)
-        if (err.error) {
-          this.results = JSON.parse(err.error).message;
-        } else {
-          this.results = JSON.parse("Error with status: " + err.status);
-        }
-      }
-    });
+    console.log(this.query);
+    this.movieService.getMovies(this.page,this.query).subscribe( res=> {
+      this.movieData = res;
+    })
   }
+  movieService = inject(MovieService);
 
-  prevPage(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.search();
-    }
-  }
-
-  nextPage(): void {
-    this.page++;
-    this.search();
+  receiveData(data: number) {
+    this.page = data;
+    this.movieService.getMovies(this.page,this.query).subscribe( res=> {
+      this.movieData = res;
+    })
   }
 }

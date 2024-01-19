@@ -41,6 +41,7 @@ import { CardViewComponent } from './core/components/card-view/card-view.compone
     CardComponent,
     CardViewComponent,
     SearchComponent,
+    FormsModule
   ],
   providers: [httpInterceptorProviders, provideHttpClient()],
   bootstrap: [AppComponent]

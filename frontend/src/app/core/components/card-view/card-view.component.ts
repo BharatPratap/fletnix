@@ -15,13 +15,9 @@ export class CardViewComponent {
   @Output() dataEvent = new EventEmitter<number>();
   movieList : any = [];
   ngOnInit() : void {
-    console.log("Child Component");
-    console.log(this.movieData);
   }
   ngOnChanges() : void {
-    console.log("Child Component reloaded");
     this.movieList = this.movieData.docs;
-    console.log(this.movieList);
   }
 
   prevPage(): void {
@@ -32,7 +28,6 @@ export class CardViewComponent {
   }
 
   nextPage(): void {
-    console.log("Child Component Next clicked");
     this.page++;
     this.dataEvent.emit(this.page);
   }

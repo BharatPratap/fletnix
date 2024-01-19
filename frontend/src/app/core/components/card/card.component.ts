@@ -11,8 +11,6 @@ export class CardComponent {
   ngOnInit() : void {
   }
   ngOnChanges() : void {
-    console.log("Card Component reloaded");
-    console.log(this.movie);
   }
 
 }
