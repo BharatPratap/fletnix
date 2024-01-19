@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const titleSchema = mongoose.Schema({
     showId: { type: String, required: true },
@@ -15,5 +16,7 @@ const titleSchema = mongoose.Schema({
     description: { type: String },
     imageUrl: { type: String }
 });
+
+titleSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Title', titleSchema);

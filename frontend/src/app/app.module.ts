@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,8 @@ import { SearchComponent } from './pages/search/search.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { BannerComponent } from './core/components/banner/banner.component';
 import { BrowseComponent } from './pages/browse/browse.component';
+import { CardComponent } from './core/components/card/card.component';
+import { CardViewComponent } from './core/components/card-view/card-view.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,11 @@ import { BrowseComponent } from './pages/browse/browse.component';
     HeaderComponent,
     BrowseComponent,
     BannerComponent,
-    CommonModule
+    CommonModule, 
+    CardComponent,
+    CardViewComponent
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
