@@ -28,7 +28,6 @@ import { CardViewComponent } from './core/components/card-view/card-view.compone
     HomeComponent,
     ProfileComponent,
     UserViewComponent,
-    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,8 @@ import { CardViewComponent } from './core/components/card-view/card-view.compone
     BannerComponent,
     CommonModule, 
     CardComponent,
-    CardViewComponent
+    CardViewComponent,
+    SearchComponent,
   ],
   providers: [httpInterceptorProviders, provideHttpClient()],
   bootstrap: [AppComponent]

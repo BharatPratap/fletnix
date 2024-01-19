@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
 
-  navList = ["Home", "TV Shows", "Popular", "My List", "Browse By Language"];
+  navList = ["Home", "TV Shows", "Popular", "My List", "Search"];
 
   logout(): void {
     this.authService.logout().subscribe({

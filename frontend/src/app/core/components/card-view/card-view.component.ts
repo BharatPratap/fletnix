@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class CardViewComponent {
   @Input() movieData: any = {};
+  page = 1;
+  @Output() dataEvent = new EventEmitter<number>();
   movieList : any = [];
   ngOnInit() : void {
     console.log("Child Component");
@@ -20,6 +22,19 @@ export class CardViewComponent {
     console.log("Child Component reloaded");
     this.movieList = this.movieData.docs;
     console.log(this.movieList);
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.dataEvent.emit(this.page);
+    }
+  }
+
+  nextPage(): void {
+    console.log("Child Component Next clicked");
+    this.page++;
+    this.dataEvent.emit(this.page);
   }
 
 }

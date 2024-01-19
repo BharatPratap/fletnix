@@ -16,12 +16,12 @@ export class MovieService {
   constructor(private http: HttpClient) {}
   
 
-  getMovies() {
+  getMovies(currPage: number) {
     return this.http.post(
       apiUrl+'search/',
       {
         query: '',
-        page: 1
+        page: currPage
       },
       httpOptions
     );
