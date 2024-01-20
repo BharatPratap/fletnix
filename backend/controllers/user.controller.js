@@ -17,12 +17,15 @@ exports.search = async (req, res) => {
     const page = parseInt(req.body.page) || 1;
     const pageSize = parseInt(req.body.pageSize) || 10;
 
-    let options = { 
-        offset: (page-1)*15, 
-        limit: 15 
+    let options = {
+        offset: (page - 1) * 15,
+        limit: 15
     }
 
-    Title.paginate({ "title": { "$regex": query, '$options': 'i' }}, options)
+    Title.paginate({
+        $or: [{ "title": { "$regex": query, '$options': 'i' } },
+        { "cast": { "$regex": query, '$options': 'i' } }]
+    }, options)
         .then(result => {
             res.json(result);
         })
@@ -45,7 +48,7 @@ exports.fetchDefaults = async (req, res) => {
         listedIn
     });
 
-    
+
 }
 
 exports.movies = async (req, res) => {
@@ -67,5 +70,5 @@ exports.movies = async (req, res) => {
         .then(res => res.json())
         .then(json => console.log(json))
         .catch(err => console.error('error:' + err));
-    
+
 }
