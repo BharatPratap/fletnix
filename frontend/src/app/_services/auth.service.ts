@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { StorageService } from '../_services/storage.service';
 
-const AUTH_API = 'http://localhost:3000/api/auth/';
+const AUTH_API = 'https://fletnix-backend-erp9.onrender.com/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
