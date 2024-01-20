@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 app.use(
     cors({
         credentials: true,
-        origin: ["*"],
+        origin: ["https://main--animated-biscuit-22cb0c.netlify.app"],
     })
 );
 
