@@ -1,18 +1,20 @@
 import { Component, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-card-view',
   templateUrl: './card-view.component.html',
   styleUrl: './card-view.component.css',
-  imports : [ CardComponent, CommonModule ],
+  imports : [ CardComponent, CommonModule, DetailsComponent ],
   standalone: true
 })
 export class CardViewComponent {
   @Input() movieData: any = {};
   page = 1;
   @Output() dataEvent = new EventEmitter<number>();
+
   movieList : any = [];
   ngOnInit() : void {
   }
@@ -31,5 +33,4 @@ export class CardViewComponent {
     this.page++;
     this.dataEvent.emit(this.page);
   }
-
 }

@@ -16,15 +16,17 @@ exports.search = async (req, res) => {
     const query = req.body.query;
     const page = parseInt(req.body.page) || 1;
     const type = req.body.type;
+    const age = parseInt(req.body.age) || 17;
+    const excludeRating = age<=18 ? 'R' : "";
 
     let options = {
         offset: (page - 1) * 15,
         limit: 15
     }
-
+    
     Title.paginate({
-        $or: [{ "title": { "$regex": query, '$options': 'i' }, "type":{ "$regex": type, '$options': 'i' } },
-        { "cast": { "$regex": query, '$options': 'i' } , "type":{ "$regex": type, '$options': 'i' }}]
+        $or: [{ "title": { "$regex": query, '$options': 'i' }, "type":{ "$regex": type, '$options': 'i' },'rating': {'$ne' : excludeRating} },
+        { "cast": { "$regex": query, '$options': 'i' } , "type":{ "$regex": type, '$options': 'i' }, 'rating': {'$ne' : excludeRating}}]
     }, options)
         .then(result => {
             res.json(result);

@@ -1,9 +1,11 @@
-<div class="cursor-pointer" (click)="showDetails()">
+<div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center" >
     <div class="max-w-sm rounded overflow-hidden bg-gray-700 text-white hover:shadow-2xl hover: shadow-white">
         <img class="w-full" src="/assets/stock.jpg" alt="Sunset in the mountains">
         <div class="px-6 py-1">
             <div class="font-bold text-xl mb-2">{{movie.title}}</div>
             <div class=" mb-2"><span class="mxl-3">{{movie.type}}</span><span class="mx-3">{{movie.duration}}</span></div>
+            <div class=" mb-2"><span class="mxl-3">{{movie.description}}</span></div>
+            <div class=" mb-2" *ngIf="movie?.director !=''"><span class="mxl-3">Director: {{movie.director}}</span></div>
         </div>
         <div class="px-6 pb-2 flex">
             <span
@@ -11,6 +13,7 @@
                 &nbsp;
             <span
             class="inline-block pxr-3 py-1 text-sm font-semibold text-gray-200 mr-2 mb-2">{{movie.listedIn[1]}}</span>
+            <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded" (click)="closeDetails()">Close</button>
         </div>
     </div>
 </div>

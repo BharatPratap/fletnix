@@ -19,6 +19,7 @@ import { BannerComponent } from './core/components/banner/banner.component';
 import { BrowseComponent } from './pages/browse/browse.component';
 import { CardComponent } from './core/components/card/card.component';
 import { CardViewComponent } from './core/components/card-view/card-view.component';
+import { DetailsComponent } from './core/components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CardViewComponent } from './core/components/card-view/card-view.compone
     CardComponent,
     CardViewComponent,
     SearchComponent,
-    FormsModule
+    FormsModule,
+    DetailsComponent
   ],
   providers: [httpInterceptorProviders, provideHttpClient()],
   bootstrap: [AppComponent]

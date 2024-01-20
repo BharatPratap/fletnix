@@ -3,6 +3,8 @@ import { HeaderComponent } from '../../core/components/header/header.component';
 import { BannerComponent } from '../../core/components/banner/banner.component';
 import { MovieService } from '../../_services/movie.service';
 import { CardViewComponent } from '../../core/components/card-view/card-view.component';
+import { StorageService } from '../../_services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-browse',
@@ -12,15 +14,22 @@ import { CardViewComponent } from '../../core/components/card-view/card-view.com
   imports : [ HeaderComponent,BannerComponent, CardViewComponent ]
 })
 export class BrowseComponent implements OnInit {
+  currentUser: any =  {}
+
+  constructor(private storageService: StorageService, private router: Router) { }
 
   movieData: any = {};
   page = 1;
 
   ngOnInit(): void {
+    this.currentUser = this.storageService.getUser();
+    if(!this.currentUser?.email) { 
+      console.log("No current user");
+      this.router.navigate(['/login'])
+      return;
+    }
     this.movieService.getMovies(this.page,'','').subscribe( res=> {
       this.movieData = res;
-      console.log("Parent component");
-      console.log(this.movieData);
     })
   }
 

@@ -10,6 +10,7 @@ exports.signup = (req, res) => {
     const user = new User({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password),
+        age: req.body.age || 20
     });
 
     user.save();
@@ -47,7 +48,8 @@ exports.signin = async (req, res) => {
 
     res.status(200).send({
         id: userData._id,
-        email: userData.email
+        email: userData.email,
+        age: userData.age
     });
 
 };

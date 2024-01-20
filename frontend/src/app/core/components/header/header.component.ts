@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorageService } from  '../../../_services/storage.service'
 import { AuthService } from '../../../_services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { AuthService } from '../../../_services/auth.service';
 })
 export class HeaderComponent {
 
-  constructor(private storageService: StorageService, private authService: AuthService) { }
+  constructor(private storageService: StorageService, private authService: AuthService, private router: Router) { }
 
   navList = ["Home", "TV Shows", "Popular", "My List", "Search"];
 
@@ -24,12 +25,13 @@ export class HeaderComponent {
       next: res => {
         console.log(res);
 
-        window.location.reload();
+        this.router.navigate(['/login'])
       },
       error: err => {
         console.log(err);
       }
     });
   }
+
 
 }
