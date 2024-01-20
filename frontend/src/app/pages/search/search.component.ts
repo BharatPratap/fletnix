@@ -31,6 +31,7 @@ interface Result {
 
 export class SearchComponent implements OnInit {
   query: string = '';
+  type: string = '';
   movieData: any = {};
   page = 1;
 
@@ -40,7 +41,7 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     console.log(this.query);
-    this.movieService.getMovies(this.page,this.query).subscribe( res=> {
+    this.movieService.getMovies(this.page,this.query, this.type).subscribe( res=> {
       this.movieData = res;
     })
   }
@@ -48,7 +49,7 @@ export class SearchComponent implements OnInit {
 
   receiveData(data: number) {
     this.page = data;
-    this.movieService.getMovies(this.page,this.query).subscribe( res=> {
+    this.movieService.getMovies(this.page,this.query,'').subscribe( res=> {
       this.movieData = res;
     })
   }

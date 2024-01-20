@@ -17,7 +17,7 @@ export class BrowseComponent implements OnInit {
   page = 1;
 
   ngOnInit(): void {
-    this.movieService.getMovies(this.page,'').subscribe( res=> {
+    this.movieService.getMovies(this.page,'','').subscribe( res=> {
       this.movieData = res;
       console.log("Parent component");
       console.log(this.movieData);
@@ -31,7 +31,7 @@ export class BrowseComponent implements OnInit {
     console.log("Receive data");
     this.page = data;
     console.log(this.page);
-    this.movieService.getMovies(this.page,'').subscribe( res=> {
+    this.movieService.getMovies(this.page,'','').subscribe( res=> {
       this.movieData = res;
     })
   }

@@ -15,7 +15,7 @@ exports.userBoard = (req, res) => {
 exports.search = async (req, res) => {
     const query = req.body.query;
     const page = parseInt(req.body.page) || 1;
-    const pageSize = parseInt(req.body.pageSize) || 10;
+    const type = req.body.type;
 
     let options = {
         offset: (page - 1) * 15,
@@ -23,8 +23,8 @@ exports.search = async (req, res) => {
     }
 
     Title.paginate({
-        $or: [{ "title": { "$regex": query, '$options': 'i' } },
-        { "cast": { "$regex": query, '$options': 'i' } }]
+        $or: [{ "title": { "$regex": query, '$options': 'i' }, "type":{ "$regex": type, '$options': 'i' } },
+        { "cast": { "$regex": query, '$options': 'i' } , "type":{ "$regex": type, '$options': 'i' }}]
     }, options)
         .then(result => {
             res.json(result);
