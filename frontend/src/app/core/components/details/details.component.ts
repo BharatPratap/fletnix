@@ -15,6 +15,7 @@ export class DetailsComponent {
   @Output() closeDetailsClick = new EventEmitter<void>();
 
   ngOnInit ():  void {
+    console.log('details component');
     console.log(this.movie);
   }
 
